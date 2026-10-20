@@ -1,0 +1,45 @@
+@startuml
+hide circle
+skinparam linetype ortho
+skinparam DefaultFontName "Arial"
+
+class "Команды" as Teams {
+  +id_команды : int [PK]
+  --
+  название : str
+}
+
+class "Игроки" as Players {
+  +id_игрока : int [PK]
+  --
+  id_команды : int [FK]
+  ФИО : str
+  игровой_номер : int
+  позиция : str
+}
+
+class "Расписание Матчей" as Matches {
+  +id_матча : int [PK]
+  --
+  id_домашней_команды : int [FK]
+  id_гостевой_команды : int [FK]
+  дата_время : str
+  итоговый_счет : str
+}
+
+class "Статистика Игроков" as MatchStats {
+  +id_записи : int [PK]
+  --
+  id_матча : int [FK]
+  id_игрока : int [FK]
+  забитые_мячи : int
+  желтые_карточки : int
+  красные_карточки : int
+}
+
+Teams ||--|{ Players 
+Teams ||--|{ Matches 
+Teams ||--|{ Matches 
+Matches ||--|{ MatchStats 
+Players ||--|{ MatchStats 
+@endum
