@@ -1,0 +1,29 @@
+@startuml
+left to right direction
+skinparam packageStyle rectangle
+
+actor "Пользователь (Болельщик)" as User
+actor "Администратор" as Admin
+
+rectangle "ИС «Учёт спортивных соревнований (мини-футбол)»" {
+    usecase "Просмотр актуального расписания игр" as UC_ViewSchedule
+    usecase "Просмотр обновляемой турнирной таблицы" as UC_ViewTable
+    usecase "Просмотр индивидуальной статистики" as UC_ViewStats
+    usecase "Авторизация в системе (проверка поля role)" as UC_Auth
+    usecase "Регистрация новых команд в системе" as UC_RegTeams
+    usecase "Управление составами команд" as UC_ManagerRoster
+    usecase "Формирование расписания матчей" as UC_CreateSchedule
+    usecase "Внесение результатов прошедших игр" as UC_EnterResults
+
+    User -- UC_ViewSchedule
+    User -- UC_ViewTable
+    User -- UC_ViewStats
+
+    Admin -- UC_Auth
+
+    UC_Auth -- UC_RegTeams
+    UC_Auth -- UC_ManagerRoster
+    UC_Auth -- UC_CreateSchedule
+    UC_Auth -- UC_EnterResults
+}
+@enduml
