@@ -2,22 +2,26 @@
 
 ## Структура проекта
 
-```text
 football_system/
-├── .gitignore
-├── LICENSE
-├── README.md
+├── .vscode/
 ├── docs/
-│   ├── diagram.png
-│   └── diagram.puml
 ├── src/
 │   └── football_system/
+│       ├── __pycache__/
 │       ├── __init__.py
-│       └── main.py
-└── tests/
-    ├── __init__.py
-    └── test_main.py
-```
+│       ├── database.py
+│       ├── football.db
+│       ├── main.py
+│       ├── models.py
+│       ├── repositories.py
+│       └── services.py
+├── tests/
+│   ├── __init__.py
+│   └── test_main.py
+├── .gitignore
+├── LICENSE
+└── README.md
+
 
 ## Описание проекта
 Данный проект предназначен для автоматизации ведения футбольных турниров, управления списками команд и ведения статистики игроков, заменяя бумажные протоколы цифровой базой данных.
