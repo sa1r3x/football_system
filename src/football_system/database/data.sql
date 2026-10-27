@@ -12,3 +12,6 @@ INSERT INTO Matches (id_домашней_команды, id_гостевой_к�
 INSERT INTO PlayerStats (id_матча, id_игрока, забитые_мячи, желтые_карточки, красные_карточки) VALUES 
 (1, 1, 2, 0, 0),
 (1, 3, 1, 1, 0);
+
+INSERT OR IGNORE INTO Users (логин, пароль) VALUES ('admin', 'admin123');
+

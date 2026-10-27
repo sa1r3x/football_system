@@ -1,6 +1,6 @@
 import sqlite3
 from typing import List, Optional
-from models import Team, Player, Match, PlayerStat
+from models import Team, Player, Match, PlayerStat, User
 
 class TeamRepository:
     """Репозиторий для управления командами (CRUD)"""
@@ -130,3 +130,20 @@ class StatRepository:
             )
             return [PlayerStat(id_stat=row[0], id_matches=row[1], id_players=row[2], goals=row[3], yellow_cards=row[4], red_cards=row[5])
                     for row in cursor.fetchall()]
+class UserRepository:
+    def __init__(self, db_path: str):
+        self.db_path = db_path
+
+    def get_user_by_login(self, login: str) -> Optional[User]:
+        with sqlite3.connect(self.db_path) as conn:
+            cursor = conn.cursor()
+            cursor.execute(
+                "SELECT id_пользователя, логин, пароль FROM Users WHERE логин = ?", 
+                (login,)
+            )
+            row = cursor.fetchone()
+            if row:
+                return User(id_пользователя=row[0], логин=row[1], пароль=row[2])
+            return None
+
+

@@ -6,7 +6,7 @@ sys.path.append(os.path.join(os.path.dirname(__file__), 'src', 'football_system'
 
 try:
     from models import Team, Player, Match, PlayerStat
-    from repositories import TeamRepository, PlayerRepository, MatchRepository, StatRepository
+    from repositories import UserRepository, TeamRepository, PlayerRepository, MatchRepository, StatRepository
     from services import LeagueService
 except ImportError as e:
     print(f"Ошибка импорта. Проверь структуру папок! Детали: {e}")
@@ -28,6 +28,7 @@ player_repo = PlayerRepository(db_path=DB_PATH)
 match_repo = MatchRepository(db_path=DB_PATH)
 stat_repo = StatRepository(db_path=DB_PATH)
 service = LeagueService(team_repo, player_repo, match_repo, stat_repo)
+user_repo = UserRepository(db_path=DB_PATH)
 
 def display_tournament_table():
     print("\n=== ТУРНИРНАЯ ТАБЛИЦА ===")
@@ -196,7 +197,18 @@ def main():
         if role == "1":
             fan_menu()
         elif role == "2":
-            admin_menu()
+            print("\n--- АВТОРИЗАЦИЯ АДМИНИСТРАТОРА ---")
+            login = input("Введите логин: ")
+            password = input("Введите пароль: ")
+            
+            # Проверяем админа через репозиторий в базе данных
+            user = user_repo.get_user_by_login(login)
+            
+            if user and user.пароль == password:
+                print(f"\n[✓] Успешный вход! Добро пожаловать, {login}.")
+                admin_menu()  # Пускаем в меню админа только если пароль совпал!
+            else:
+                print("\n[X] Ошибка: Неверный логин или пароль! Доступ закрыт.")
         elif role == "0":
             print("Приложение закрыто. Удачи в турнире!")
             break

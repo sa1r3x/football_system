@@ -39,3 +39,10 @@ CREATE TABLE IF NOT EXISTS PlayerStats (
     FOREIGN KEY (id_матча) REFERENCES Matches(id_матча) ON DELETE CASCADE,
     FOREIGN KEY (id_игрока) REFERENCES Players(id_игрока) ON DELETE CASCADE
 );
+CREATE TABLE IF NOT EXISTS Users (
+    id_пользователя INTEGER PRIMARY KEY AUTOINCREMENT,
+    логин TEXT NOT NULL UNIQUE,
+    пароль TEXT NOT NULL
+);
+
+

@@ -38,3 +38,9 @@ class PlayerStat:
     goals: int = 0
     yellow_cards: int = 0
     red_cards: int = 0
+@dataclass
+class User:
+    id_пользователя: int
+    логин: str
+    пароль: str
+
