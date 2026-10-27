@@ -14,14 +14,19 @@ except ImportError as e:
 
 sys.stdout.reconfigure(encoding='utf-8')
 
-# База данных лежит в той же папке, что и сам main.py
-BASE_DIR = os.path.dirname(os.path.abspath(__file__))
-DB_PATH = os.path.join(BASE_DIR, 'football.db')
+from pathlib import Path
+from repositories import TeamRepository, PlayerRepository, MatchRepository, StatRepository
 
-team_repo = TeamRepository(DB_PATH)
-player_repo = PlayerRepository(DB_PATH)
-match_repo = MatchRepository(DB_PATH)
-stat_repo = StatRepository(DB_PATH)
+# Автоматически находим правильный путь к базе данных football.db
+# Находим папку, где лежит сам main.py, и берем файл прямо в ней
+BASE_DIR = Path(__file__).resolve().parent
+DB_PATH = str(BASE_DIR / "football.db") # Переводим в строку для sqlite3
+
+# Инициализируем репозитории, передавая им правильный путь
+team_repo = TeamRepository(db_path=DB_PATH)
+player_repo = PlayerRepository(db_path=DB_PATH)
+match_repo = MatchRepository(db_path=DB_PATH)
+stat_repo = StatRepository(db_path=DB_PATH)
 service = LeagueService(team_repo, player_repo, match_repo, stat_repo)
 
 def display_tournament_table():
