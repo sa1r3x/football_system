@@ -13,5 +13,5 @@ INSERT INTO PlayerStats (id_матча, id_игрока, забитые_мячи
 (1, 1, 2, 0, 0),
 (1, 3, 1, 1, 0);
 
-INSERT OR IGNORE INTO Users (логин, пароль) VALUES ('admin', 'admin123');
+INSERT OR IGNORE INTO Users (логин, пароль) VALUES ('admin1', 'admin123'), ('admin2', 'yamal19');
 

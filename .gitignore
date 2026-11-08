@@ -4,3 +4,4 @@ venv/
 .venv/
 football.db
 .vscode/
+out/
